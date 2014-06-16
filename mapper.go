@@ -20,21 +20,23 @@ func (m *Mapper) Map(col string, dest interface{}) {
 	m.cols[col] = dest
 }
 
+var null = new(interface{})
+
 // Do performs the mapping with the given sql.Rows. Columns where no
 // mapping is defined are ignored.
 func (m *Mapper) Do(rows *sql.Rows) error {
-	var values []interface{}
-
 	cols, err := rows.Columns()
 	if err != nil {
 		return err
 	}
 
+	var values []interface{}
+
 	for _, col := range cols {
 		if dest, exists := m.cols[col]; exists {
 			values = append(values, dest)
 		} else {
-			values = append(values, &sql.RawBytes{})
+			values = append(values, null)
 		}
 	}
 
