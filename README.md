@@ -1,3 +1,7 @@
+**You probably shouldn’t use rowmapper. Consider using [sqlbuilder](https://github.com/thcyron/sqlbuilder) instead.**
+
+---
+
 rowmapper
 =========
 
